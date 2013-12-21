@@ -67,9 +67,9 @@ public class MemcachedCachingProvider implements CachingProvider {
 
     public Properties getDefaultProperties() {
         Properties result = new Properties();
-        result.put(MEMCACHED_PROPERTIES.ADDRESS, "127.0.0.1:11211");
-        result.put(MEMCACHED_PROPERTIES.BINARY, "true");
-        result.put(MEMCACHED_PROPERTIES.PREFIXKEY, "false");
+        result.put(MEMCACHED_PROPERTIES.ADDRESS.name(), "127.0.0.1:11211");
+        result.put(MEMCACHED_PROPERTIES.BINARY.name(), "true");
+        result.put(MEMCACHED_PROPERTIES.PREFIXKEY.name(), "false");
         return result;
     }
 

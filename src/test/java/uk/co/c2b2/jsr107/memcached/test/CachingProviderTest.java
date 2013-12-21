@@ -17,7 +17,7 @@ import uk.co.c2b2.jsr107.memcached.spi.MemcachedCachingProvider;
  *
  * @author steve
  */
-public class CachingProviderTests extends TestCase {
+public class CachingProviderTest {
 
     @Test
     public void testDefaultProvider () {
@@ -27,8 +27,8 @@ public class CachingProviderTests extends TestCase {
     @Test
     public void testDefaultProperties() {
         Properties props = Caching.getCachingProvider().getDefaultProperties();
-        assertEquals(props.getProperty(MemcachedCachingProvider.MEMCACHED_PROPERTIES.ADDRESS.toString()),"127.0.0.1:11211");
-        assertEquals(props.getProperty(MemcachedCachingProvider.MEMCACHED_PROPERTIES.PREFIXKEY.toString()),"false");
-        assertEquals(props.getProperty(MemcachedCachingProvider.MEMCACHED_PROPERTIES.BINARY.toString()), "true");
+        assertEquals(props.getProperty(MemcachedCachingProvider.MEMCACHED_PROPERTIES.ADDRESS.name()),"127.0.0.1:11211");
+        assertEquals(props.getProperty(MemcachedCachingProvider.MEMCACHED_PROPERTIES.PREFIXKEY.name()),"false");
+        assertEquals(props.getProperty(MemcachedCachingProvider.MEMCACHED_PROPERTIES.BINARY.name()), "true");
     }
 }
