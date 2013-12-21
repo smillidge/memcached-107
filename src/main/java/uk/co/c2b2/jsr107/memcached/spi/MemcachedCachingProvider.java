@@ -58,7 +58,7 @@ public class MemcachedCachingProvider implements CachingProvider {
 
     public URI getDefaultURI() {
         try {
-            return new URI("memcached://default-cache-config.xml");
+            return new URI("memcached://default-cache-config.properties");
         } catch (URISyntaxException ex) {
             Logger.getLogger(MemcachedCachingProvider.class.getName()).log(Level.SEVERE, null, ex);
         }
