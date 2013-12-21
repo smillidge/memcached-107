@@ -6,7 +6,9 @@
 
 package uk.co.c2b2.jsr107.memcached;
 
+import java.lang.ref.WeakReference;
 import java.net.URI;
+import java.util.HashMap;
 import java.util.Properties;
 import javax.cache.Cache;
 import javax.cache.CacheManager;
@@ -18,21 +20,33 @@ import javax.cache.spi.CachingProvider;
  * @author steve
  */
 public class MemcachedCacheManager implements CacheManager {
+    private Properties properties;
+    private URI uri;
+    private CachingProvider provider;
+    WeakReference<ClassLoader> loader;
+    private final HashMap<String, MemcachedCache<?, ?>> caches = new HashMap<String, MemcachedCache<?, ?>>();
+
+    public MemcachedCacheManager(Properties properties, URI uri, CachingProvider provider, ClassLoader loader) {
+        this.properties = properties;
+        this.uri = uri;
+        this.provider = provider;
+        this.loader = new WeakReference<ClassLoader>(loader);
+    }
 
     public CachingProvider getCachingProvider() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return provider;
     }
 
     public URI getURI() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return uri;
     }
 
     public ClassLoader getClassLoader() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return loader.get();
     }
 
     public Properties getProperties() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return properties;
     }
 
     public <K, V, C extends Configuration<K, V>> Cache<K, V> createCache(String cacheName, C configuration) throws IllegalArgumentException {
@@ -48,7 +62,7 @@ public class MemcachedCacheManager implements CacheManager {
     }
 
     public Iterable<String> getCacheNames() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return caches.keySet();
     }
 
     public void destroyCache(String cacheName) {
