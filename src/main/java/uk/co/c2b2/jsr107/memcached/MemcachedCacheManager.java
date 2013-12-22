@@ -25,6 +25,7 @@ public class MemcachedCacheManager implements CacheManager {
     private CachingProvider provider;
     WeakReference<ClassLoader> loader;
     private final HashMap<String, MemcachedCache<?, ?>> caches = new HashMap<String, MemcachedCache<?, ?>>();
+    private boolean closed;
 
     public MemcachedCacheManager(Properties properties, URI uri, CachingProvider provider, ClassLoader loader) {
         this.properties = properties;
@@ -78,11 +79,11 @@ public class MemcachedCacheManager implements CacheManager {
     }
 
     public void close() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        closed = true;
     }
 
     public boolean isClosed() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return closed;
     }
 
     public <T> T unwrap(Class<T> clazz) {

@@ -23,6 +23,7 @@ import javax.cache.processor.EntryProcessorResult;
  * @author steve
  */
 public class MemcachedCache<K,V> implements Cache<K,V> {
+    private boolean closed;
 
     public V get(K key) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -113,11 +114,11 @@ public class MemcachedCache<K,V> implements Cache<K,V> {
     }
 
     public void close() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        closed = true;
     }
 
     public boolean isClosed() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return closed;
     }
 
     public <T> T unwrap(Class<T> clazz) {

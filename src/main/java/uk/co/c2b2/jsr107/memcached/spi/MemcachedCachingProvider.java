@@ -36,12 +36,13 @@ public class MemcachedCachingProvider implements CachingProvider {
     }
 
     public CacheManager getCacheManager(URI uri, ClassLoader classLoader, Properties properties) {
-        CacheManager result = null;
+        CacheManager result;
         HashMap<URI,CacheManager> cacheManagers4ClassLoader = cacheManagerMap.get(classLoader);
         if (cacheManagers4ClassLoader == null ) {
             cacheManagers4ClassLoader = new HashMap<URI,CacheManager>();
             result = new MemcachedCacheManager(properties,uri,this,classLoader);
             cacheManagers4ClassLoader.put(uri, result);
+            cacheManagerMap.put(classLoader, cacheManagers4ClassLoader);
         } else {
             result = cacheManagers4ClassLoader.get(uri);
             if (result == null) {
